@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>University of Calabar — Result Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --card-top:#1c2f8f;
+    --card-bottom:#12b3a8;
+    --field-bg:rgba(255,255,255,0.12);
+    --field-border:rgba(255,255,255,0.25);
+    --text-light:#dbe6ff;
+    --text-faint:#a9bdf0;
+    --btn-pink:#e97fb0;
+    --btn-teal:#2fd6c8;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    min-height:100vh;
+    font-family:'Inter', system-ui, sans-serif;
+    background:radial-gradient(ellipse at top, #2a2f55 0%, #0c0e1e 70%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 16px;
+  }
+  .card{
+    width:100%;
+    max-width:360px;
+    background:linear-gradient(160deg, var(--card-top) 0%, var(--card-bottom) 100%);
+    border-radius:22px;
+    padding:32px 26px 26px;
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+    text-align:center;
+  }
+  .logo{
+    width:64px; height:64px;
+    border-radius:50%;
+    background:#fff;
+    margin:0 auto 14px;
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+    border:2px solid rgba(255,255,255,.6);
+  }
+  .logo img{width:100%; height:100%; object-fit:contain;}
+  h1{
+    color:#fff;
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+  }
+  .subtitle{
+    color:var(--text-faint);
+    font-size:10.5px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    margin-top:4px;
+    margin-bottom:24px;
+  }
+  .field{
+    text-align:left;
+    margin-bottom:14px;
+  }
+  .field label{
+    display:block;
+    color:var(--text-light);
+    font-size:9.5px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+  .field input{
+    width:100%;
+    background:var(--field-bg);
+    border:1px solid var(--field-border);
+    border-radius:10px;
+    padding:11px 14px;
+    color:#fff;
+    font-size:13px;
+    font-family:inherit;
+    outline:none;
+  }
+  .field input::placeholder{color:rgba(255,255,255,.55);}
+  .field input:focus{border-color:rgba(255,255,255,.6);}
+  .toggle-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin:18px 0 18px;
+  }
+  .toggle-btn{
+    padding:9px 0;
+    border-radius:10px;
+    border:1px solid var(--field-border);
+    background:var(--field-bg);
+    color:var(--text-light);
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    cursor:pointer;
+  }
+  .toggle-btn.active{
+    background:rgba(255,255,255,.28);
+    color:#fff;
+    border-color:rgba(255,255,255,.55);
+  }
+  .login-btn{
+    width:100%;
+    border:0;
+    border-radius:10px;
+    padding:13px 0;
+    font-size:12.5px;
+    font-weight:800;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:#fff;
+    background:linear-gradient(90deg, var(--btn-pink), var(--btn-teal));
+    cursor:pointer;
+  }
+  .footer-links{
+    display:flex;
+    justify-content:space-between;
+    margin-top:16px;
+    font-size:10.5px;
+  }
+  .footer-links a{
+    color:var(--text-faint);
+    text-decoration:underline;
+  }
+  @media (max-width:380px){
+    .card{padding:26px 20px 22px;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="logo">
+      <img src="IMG_9483.jpeg" alt="University of Calabar crest">
+    </div>
+    <h1>University of Calabar</h1>
+    <p class="subtitle">Result Portal</p>
+
+    <form onsubmit="return false;">
+      <div class="field">
+        <label for="matric">Matriculation Number</label>
+        <input id="matric" type="text" placeholder="e.g. CC/20/0001">
+      </div>
+
+      <div class="field">
+        <label for="jamb">JAMB Registration Number</label>
+        <input id="jamb" type="text" placeholder="e.g. 12345678AB">
+      </div>
+
+      <div class="field">
+        <label for="pin">Access Pin</label>
+        <input id="pin" type="password" placeholder="Enter your pin">
+      </div>
+
+      <div class="toggle-row">
+        <button type="button" class="toggle-btn active" id="btn-new">New Student</button>
+        <button type="button" class="toggle-btn" id="btn-returning">Returning</button>
+      </div>
+
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <div class="footer-links">
+      <a href="#">Don't have a pin? Get one here</a>
+      <a href="#">Change Pin</a>
+    </div>
+  </div>
+
+<script>
+  const btnNew = document.getElementById('btn-new');
+  const btnReturning = document.getElementById('btn-returning');
+  btnNew.addEventListener('click', () => {
+    btnNew.classList.add('active');
+    btnReturning.classList.remove('active');
+  });
+  btnReturning.addEventListener('click', () => {
+    btnReturning.classList.add('active');
+    btnNew.classList.remove('active');
+  });
+</script>
+
+</body>
+</html>
